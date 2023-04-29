@@ -1,0 +1,61 @@
+﻿@using HajurKoRentalSystem.Models;
+@model Vehicle
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container">
+    <h1>Details</h1>
+    <form method="get">
+        <div class="form-group">
+            <img id="previewImage" src="data:image /*;base64,@(Convert.ToBase64String(Model.Image))" style="width: 220px; height: 230px;" />
+        </div>
+        <div class="form-group row">
+            <input asp-for="Id" class="form-control" type="hidden"/>
+            <div class="col-4">
+                <label asp-for="Model"></label>
+            </div>
+            <div class="col-8 mb-4">
+                <input asp-for="Model" class="form-control" disabled/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <input asp-for="Id" class="form-control" type="hidden"/>
+            <div class="col-4">
+                <label asp-for="Brand"></label>
+            </div>
+            <div class="col-8 mb-4">
+                <input asp-for="Brand" class="form-control" disabled />
+            </div>
+        </div>
+        <div class="form-group row">
+            <input asp-for="Id" class="form-control" type="hidden"/>
+            <div class="col-4">
+                <label asp-for="Color"></label>
+            </div>
+            <div class="col-8 mb-4">
+                <input asp-for="Color" class="form-control" disabled />
+            </div>
+        </div>
+        <div class="form-group row">
+            <input asp-for="Id" class="form-control" type="hidden" />
+            <div class="col-4">
+                <label asp-for="Description"></label>
+            </div>
+            <div class="col-8 mb-4">
+                <input asp-for="Description" class="form-control" disabled />
+            </div>
+        </div>
+        <div class="form-group row">
+            <input asp-for="Id" class="form-control" type="hidden" />
+            <div class="col-4">
+                <label asp-for="PricePerDay"></label>
+            </div>
+            <div class="col-8 mb-4">
+                <input asp-for="PricePerDay" class="form-control" disabled />
+            </div>
+        </div>
+    </form>
+</div>
+
