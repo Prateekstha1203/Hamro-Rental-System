@@ -77,7 +77,7 @@
 <div class="container-fluid">
 
     <div class="row">
-        <div class="col-6 bg-danger">
+        <div class="col-6 bg-danger vh-100">
             <!-- <video autoplay loop muted plays-inline class="" >
                 <source src="./RequiredGenerousCob-mobile.mp4" type="video/mp4" >
             </video> -->
@@ -104,6 +104,27 @@
                 </div>
 
                 <div class="col-10">
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control py-2 rounded-0" autocomplete="name" aria-required="true" placeholder="Enter your name">
+                        <span  class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-10">
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control py-2 rounded-0" autocomplete="address" aria-required="true" placeholder="Enter your Address">
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-10">
+                    <div class="form-group mt-3">
+                        <input  type="number" class="form-control py-2 rounded-0" autocomplete="username" aria-required="true" placeholder="Enter your Phone number">
+                        <span  class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-10">
                     <div class="form-group mt-4">
                         <input asp-for="Input.Password" type="password" class="form-control py-2 rounded-0" autocomplete="new-password" aria-required="true" placeholder="Enter your password">
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
@@ -121,9 +142,19 @@
                 </div>
 
                 @* <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button> *@
+                <div class=" text-center col-10 mt-2 ">
+                    <p>
+                        Already have an account ? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Login</a>
+                    </p>
+                </div>
             </form>
+
+           
+           
         </div>
 
+      
+    
     </div>
 </div>
 

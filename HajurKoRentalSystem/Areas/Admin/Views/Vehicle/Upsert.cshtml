@@ -4,101 +4,175 @@
 @{
     ViewData["Title"] = "Vehicle";
 }
+<link rel="stylesheet" href="~/css/Index.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+
 
 <div class="container-fluid">
-    <h1>Brands</h1>
-    <form method="post" enctype="multipart/form-data">
-        <div class="row mb-3">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="col-6">
-                <h2 class="text-dark">Vehicle</h2>
+    <div class="row">
+        <div class="col-5 col-lg-2  d-block align-content-center pe-0 collapse accordion-collapse  vh-100 " id="sidebar">
+            <div class="d-flex p-0">
+                <h5 class="mt-4 ps-3 pb-2"> <a class="navbar-brand text-black" asp-area="" asp-controller="Home" asp-action="Index">HajurKoRentalSystem</a> </h5>
+
             </div>
-            <div class="col-8 pt-4">
-                <div class="form-group row">
-                    <input asp-for="Id" class="form-control" type="hidden" />
-                    <div class="col-4">
-                        <label asp-for="Model"></label>
-                    </div>
-                    <div class="col-8 mb-4">
-                        <input asp-for="Model" class="form-control" />
-                        <span asp-validation-for="Model" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <input asp-for="Id" class="form-control" type="hidden" />
-                    <div class="col-4">
-                        <label asp-for="Color"></label>
-                    </div>
-                    <div class="col-8 mb-4">
-                        <input asp-for="Color" class="form-control" />
-                        <span asp-validation-for="Color" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <input asp-for="Id" class="form-control" type="hidden" />
-                    <div class="col-4">
-                        <label asp-for="PricePerDay"></label>
-                    </div>
-                    <div class="col-8 mb-4">
-                        <input asp-for="PricePerDay" class="form-control" />
-                        <span asp-validation-for="PricePerDay" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="Description"></label>
-                    </div>
-                    <div class="col-8 mb-4">
-                        <textarea asp-for="Description" class="form-control"></textarea>
-                        <span asp-validation-for="Description" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="Brand" class="control-label mb-2"></label>
-                    </div>
-                    <div class="col-8 mb-4">
-                        <input asp-for="Brand" class="form-control" />
-                        <span asp-validation-for="Brand" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="Image"></label>
-                    </div>
-                    <div class="col-8 mb-4">
-                        <input type="file" id="uploadImage" onchange="readURL(this);" placeholder="Profile Image" name="image" multiple="multiple" class="ms-2 form-control" accept="image/png, image/gif, image/jpeg" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-8 offset-4">
-                        @if (Model.Id != 0)
-                        {
-                            <div class="row">
-                                <div class="col">
-                                    <button type="submit" class="btn btn-dark form-control" asp-route-id="@Model">Update</button>
-                                </div>
-                                <div class="col">
-                                    <a asp-action="Index" class="btn btn-dark form-control">Back to List</a>
-                                </div>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="row">
-                                <div class="col">
-                                    <button type="submit" class="btn btn-dark form-control">Create</button>
-                                </div>
-                                <div class="col">
-                                    <a asp-action="Index" class="btn btn-dark form-control">Back to List</a>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
+            <div>
+                <ul class="nav nav-pills flex-column mt-2">
+                    <li class="nav-item ms-2 mt-5 mb-3 p-1 active">
+                        <a class="nav-link" aria-current="page" href="#"> <i class="bi bi-house-fill  pe-2"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a class="nav-link " href="#"><i class="bi bi-plus-circle-fill pe-2"></i> New car</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a class="nav-link" href="#"> <i class="fa-solid fa-user-tie  pe-2"></i> Profile</a>
+                    </li>
+
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a class="nav-link" href="#"> <i class="fa-solid fa-calendar  pe-2"></i> Approve Rental</a>
+                    </li>
+
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a class="nav-link" href="#"> <i class="bi bi-activity  pe-2"></i> Sales</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a class="nav-link" href="#"> <i class="fa-solid fa-coins  pe-2"></i> Change Password</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <a href="#" id="logout" class="nav-link text-danger"><i class="fa-solid fa-coins  pe-2"></i>Logout</a>
+                        </form>
+                    </li>
+                </ul>
+
             </div>
         </div>
-    </form>
+        <div class="col-md-9 col-lg-10 " id="midcontent">
+            <div class="container-fluid">
+                <div class="row justify-content-center mt-4">
+
+                    <div class="col-9 col-lg-10 px-0 pr-4 bg-white mt-5 pb-5">
+
+                        <a asp-controller="Vehicle" asp-action="Index" class="btn outline-none bg-secondary text-white rounded-0">
+                            <i class="bi bi-box-arrow-left pe-2"></i>Back
+                        </a>
+
+                        <div class="container pb-4">
+                            <div class="row justify-content-center">
+                                <div class="col-11 mt-5">
+                                    <h3 class='pt-3 text-primary pb-1 '>Register a new car</h3>
+                                    <hr>
+                                    <form class='row gx-3 pt-5' method="post" enctype="multipart/form-data">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <div class="col-12">
+                                            <label htmlFor="imageupload" class="form-label  py-4 px-3 bg-light">
+                                                <div class="d-flex flex-column justify-content-center text-center"> <span><i class="bi bi-camera-fill text-primary"></i></span> Car image</div>
+                                                <input type="file" id="uploadImage" onchange="readURL(this);" placeholder="Profile Image" name="image" hidden multiple="multiple" class="ms-2 form-control" accept="image/png, image/gif, image/jpeg" />
+                                                <p id="fileCount"></p>
+                                            </label>
+                                            <span asp-validation-for="Image" class="text-danger"></span>
+                                        </div>
+                                        <div class='d-flex col-6 mb-4 flex-column'>
+                                            <label htmlFor="fnamelabel" class="form-label">Car Number</label>
+                                            <input type="text" class=" form-control " placeholder='Enter number from number plate' aria-describedby="carnumber" />
+                                        </div>
+
+
+                                        <div class='d-flex col-6 mb-4 flex-column'>
+                                            <label htmlFor="lanamelabel" class="form-label">Brand</label>
+                                            <input type="text" asp-for="Brand" class=" form-control " placeholder='Brand Name' aria-describedby="LastName" />
+                                            <span asp-validation-for="Brand" class="text-danger"></span>
+
+                                        </div>
+                                        <div class='d-flex col-6 mb-4 flex-column'>
+                                            <label htmlFor="fnamelabel" class="form-label">Price</label>
+                                            <input asp-for="PricePerDay" type="number" class="form-control " placeholder='price per day' aria-describedby="price" />
+                                            <span asp-validation-for="PricePerDay" class="text-danger"></span>
+                                        </div>
+
+                                        <div class='d-flex col-6 mb-4 flex-column'>
+                                            <label htmlFor="modellabel" class="form-label">Model</label>
+                                            <input asp-for="Model" type="text" class=" form-control  " placeholder='Model of car ' />
+                                            <span asp-validation-for="Model" class="text-danger"></span>
+                                        </div>
+
+                                        <div class='d-flex col-6 mb-4 flex-column'>
+                                            <label htmlFor="condition" class="form-label">Color</label>
+                                            <input asp-for="Color" type="text" class=" form-control  " placeholder='Color of car ' aria-describedby="condition" />
+                                            <span asp-validation-for="Color" class="text-danger"></span>
+                                        </div>
+
+                                        <div class='d-flex col-6 mb-4 flex-column'>
+                                            <label  class="form-label">Condition</label>
+                                            <input  type="text" class=" form-control  "placeholder='model '  />
+                                            <span  class="text-danger"></span>
+                                        </div>
+
+                                        <div class='d-flex col-6 mb-4 flex-column'>
+                                            <label class="form-label">Description</label>
+                                            <textarea asp-for="Description" class="form-control"></textarea>
+                                            <span asp-validation-for="Description" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="row justify-content-between">
+                                            
+                                            @if (Model.Id != 0)
+                                            {
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <button type="submit" class="btn login-btn btn-success px-5 form-control" asp-route-id="@Model">Update</button>
+                                                    </div>
+                                                 
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <button type="submit" class="btn btn-success form-control">Create</button>
+                                                    </div>
+                                                   
+                                                </div>
+                                            }
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 </div>
+
+
+<script>
+    document.getElementById('logout').addEventListener('click', function (e) {
+        e.preventDefault();
+        document.getElementById('logoutForm').submit();
+    });
+</script>
+
+<script>
+    document.getElementById('uploadImage').addEventListener('change', function (e) {
+        var fileCount = e.target.files.length;
+        var fileCountText = "";
+        if (fileCount == 0) {
+            fileCountText = "0 file selected";
+        } else if (fileCount == 1) {
+            fileCountText = "1 file selected";
+        } else {
+            fileCountText = fileCount + " files selected";
+        }
+        document.getElementById('fileCount').innerText = fileCountText;
+    });
+</script>
 
 

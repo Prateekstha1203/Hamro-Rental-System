@@ -5,57 +5,144 @@
     ViewData["Title"] = "Details";
 }
 
-<div class="container">
-    <h1>Details</h1>
-    <form method="get">
-        <div class="form-group">
-            <img id="previewImage" src="data:image /*;base64,@(Convert.ToBase64String(Model.Image))" style="width: 220px; height: 230px;" />
-        </div>
-        <div class="form-group row">
-            <input asp-for="Id" class="form-control" type="hidden"/>
-            <div class="col-4">
-                <label asp-for="Model"></label>
+<link rel="stylesheet" href="~/css/Index.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-5 col-lg-2  d-block align-content-center pe-0 collapse accordion-collapse  vh-100 " id="sidebar">
+            <div class="d-flex p-0">
+                <h5 class="mt-4 ps-3 pb-2"> <a class="navbar-brand text-black" asp-area="" asp-controller="Home" asp-action="Index">HajurKoRentalSystem</a> </h5>
+
             </div>
-            <div class="col-8 mb-4">
-                <input asp-for="Model" class="form-control" disabled/>
-            </div>
-        </div>
-        <div class="form-group row">
-            <input asp-for="Id" class="form-control" type="hidden"/>
-            <div class="col-4">
-                <label asp-for="Brand"></label>
-            </div>
-            <div class="col-8 mb-4">
-                <input asp-for="Brand" class="form-control" disabled />
-            </div>
-        </div>
-        <div class="form-group row">
-            <input asp-for="Id" class="form-control" type="hidden"/>
-            <div class="col-4">
-                <label asp-for="Color"></label>
-            </div>
-            <div class="col-8 mb-4">
-                <input asp-for="Color" class="form-control" disabled />
-            </div>
-        </div>
-        <div class="form-group row">
-            <input asp-for="Id" class="form-control" type="hidden" />
-            <div class="col-4">
-                <label asp-for="Description"></label>
-            </div>
-            <div class="col-8 mb-4">
-                <input asp-for="Description" class="form-control" disabled />
-            </div>
-        </div>
-        <div class="form-group row">
-            <input asp-for="Id" class="form-control" type="hidden" />
-            <div class="col-4">
-                <label asp-for="PricePerDay"></label>
-            </div>
-            <div class="col-8 mb-4">
-                <input asp-for="PricePerDay" class="form-control" disabled />
+            <div>
+                <ul class="nav nav-pills flex-column mt-2">
+                    <li class="nav-item ms-2 mt-5 mb-3 p-1 active">
+                        <a class="nav-link" aria-current="page" href="#"> <i class="bi bi-house-fill  pe-2"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a class="nav-link " href="#"><i class="bi bi-plus-circle-fill pe-2"></i> New car</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a class="nav-link" href="#"> <i class="fa-solid fa-user-tie  pe-2"></i> Profile</a>
+                    </li>
+
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a class="nav-link" href="#"> <i class="fa-solid fa-calendar  pe-2"></i> Approve Rental</a>
+                    </li>
+
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a class="nav-link" href="#"> <i class="bi bi-activity  pe-2"></i> Sales</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a class="nav-link" href="#"> <i class="fa-solid fa-coins  pe-2"></i> Change Password</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <a href="#" id="logout" class="nav-link text-danger"><i class="fa-solid fa-coins  pe-2"></i>Logout</a>
+                        </form>
+                    </li>
+                </ul>
+
             </div>
         </div>
-    </form>
+        <div class="col-md-9 col-lg-10 " id="midcontent">
+
+            <div class="container-fluid">
+                <div class="row justify-content-center mt-4">
+
+                    <div class="col-9 col-lg-10 px-0  bg-white mt-5 pb-5">
+
+                        <div class="px-0">
+                            <a asp-action="Index" class=" btn outline-none bg-secondary text-white rounded-0 "> <i class="bi bi-box-arrow-left pe-2"></i>Back</a>
+                        </div>
+
+                        <div class="container pb-4">
+                            <div class="row justify-content-center">
+
+                                <div class="col-12">
+
+
+                                    <div class="row justify-content-center">
+                                        <div class="col-11">
+                                            <h3 class='pt-3 text-primary pb-1 '> Car Details </h3>
+                                            <hr>
+                                            <form class='row gx-3 pt-5 text-center justify-content-center' method="post" enctype="multipart/form-data">
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                <div class="col-12 text-center d-flex justify-content-center">
+                                                    <label htmlFor="imageupload" class="form-label  p-2 bg-light">
+                                                        <img id="previewImage" src="data:image /*;base64,@(Convert.ToBase64String(Model.Image))" style="width: 100px; height: 100px;" />
+                                                    </label>
+
+                                                </div>
+                                                <div class=' col-8 mb-2 text-center'>
+                                                    <P class="text-center"> <strong>Car Number: </strong>  </P>
+                                                    @* <input type="text" class=" form-control " placeholder='Enter number from number plate' disabled aria-describedby="carnumber" />*@
+                                                </div>
+
+
+                                                <div class=' col-8 mb-2 '>
+                                                    <p style="font-size:16px;"> <strong style="font-size:18px;">Brand: </strong>  @Model.Brand </p>
+
+                                                </div>
+                                                <div class=' col-8 mb-2'>
+                                                    <p style="font-size:16px;"> <strong style="font-size:18px;">Price per day: </strong> @Model.PricePerDay </p>
+
+                                                </div>
+
+                                                <div class=' col-8 mb-2 '>
+                                                    <p style="font-size:16px;"> <strong style="font-size:18px;">Model: </strong> @Model.Model </p>
+
+                                                </div>
+
+                                                <div class=' col-8 mb-2 '>
+                                                    <p style="font-size:16px;"> <strong style="font-size:18px;">Color: </strong> @Model.Color </p>
+
+                                                </div>
+
+                                                <div class=' col-8 mb-2 '>
+                                                    <p style="font-size:16px;"> <strong style="font-size:18px;"> Condition: </strong>  </p>
+                                                    @* <input type="text" class=" form-control  " disabled placeholder='model ' />*@
+
+                                                </div>
+
+                                                <div class=' col-8 mb-2'>
+                                                    <p style="font-size:16px;"> <strong style="font-size:18px;">Description: </strong> @Model.Description </p>
+
+
+                                                </div>
+
+                                            
+
+                                            </form>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 </div>
+
+
+<script>
+    document.getElementById('logout').addEventListener('click', function (e) {
+        e.preventDefault();
+        document.getElementById('logoutForm').submit();
+    });
+</script>
+
+
 

@@ -7,7 +7,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-6 mt-5 pt-2 mb-5 pb-5 px-5">
+        <div class="col-6 mt-5 pt-2  px-5">
             <div class="row px-5">
                 <div class="col-10">
                     <h1 class="text-primary">Welcome to </h1>
@@ -33,11 +33,14 @@
                 </div>
 
                 <div>
-                    <div class="checkbox  mt-3">
+                    <div class="col-10 checkbox d-flex justify-content-between mt-3">
                         <label asp-for="Input.RememberMe" class="form-label">
                             <input class="form-check-input" asp-for="Input.RememberMe" />
                             @Html.DisplayNameFor(m => m.Input.RememberMe)
                         </label>
+                        <p>
+                            <strong><a id="forgot-password" class=" text-decoration-none text-black" asp-page="./ForgotPassword">Forgot your password?</a></strong>
+                        </p>
                     </div>
                 </div>
 
@@ -45,16 +48,14 @@
                     <button id="login-submit" type="submit" class="btn btn-primary mt-2 px-5 rounded-0 w-100">Login</button>
                 </div>
 
-                <div class="mt-2">
+                <div class="col-10 mt-2 text-center">
+
                     <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        Don't have an account yet? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register</a>
                     </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                    <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                    </p>
+                    @* <p>
+                    <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                    </p>*@
                 </div>
             </form>
 
@@ -63,7 +64,7 @@
 
 
 
-        <div class="col-6 bg-danger">
+        <div class="col-6 bg-danger vh-100">
             @* <section> *@
             @*     <h3>Use another service to log in.</h3> *@
             @*     <hr/> *@

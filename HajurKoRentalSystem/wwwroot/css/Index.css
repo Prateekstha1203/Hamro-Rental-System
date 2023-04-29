@@ -1,0 +1,98 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800;900&family=Reem+Kufi&family=Roboto&display=swap');
+
+
+h1 {
+    font-size: 32px !important;
+    font-family: 'Poppins';
+    font-weight: 600;
+    color: #222;
+}
+
+strong {
+    color: #0C0C0C;
+    font-size: 16px;
+}
+
+p {
+    font-size: 12px;
+}
+
+.active {
+    background-color: #D9DCFD;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+/* sidenav bar properties */
+.nav li a {
+    text-decoration: none;
+    color: #303972 !important;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.nav li:hover {
+    background-color: #D9DCFD;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    color: #303972;
+}
+
+/* defining properties for the homepage sections */
+
+
+#sidebar {
+    transition: 0.3s;
+}
+
+#midcontent {
+    background-color: #D9DCFD;
+}
+
+#searchbox button {
+    border-color: #e6e6e6;
+    background-color: #fff;
+    border-right: none !important;
+    border-radius: 20px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    border: 1px solid #e6e6e6
+}
+
+    #searchbox button:hover {
+        background-color: #303972;
+        color: #fff;
+    }
+
+#searchbox input {
+    font-size: 12px;
+    font-family: 'poppins';
+    border-color: #e6e6e6;
+    border-left: none !important;
+    outline: 0;
+    padding-left: 5px;
+    border-radius: 20px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+#banner button {
+    height: 40px;
+    width: 40px;
+}
+
+#banner div {
+    width: 22%;
+}
+
+#burger {
+    height: 40px;
+    width: 40px;
+}
+
+/* calendar */
+
+@media (max-width: 992px) {
+    #sidebar {
+        position: absolute;
+    }
+}
