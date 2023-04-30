@@ -14,7 +14,7 @@ namespace HajurKoRentalSystem.Areas.Admin.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        #region Razor Pages
+        #region 
         [HttpGet]
         public IActionResult Index()
         {
