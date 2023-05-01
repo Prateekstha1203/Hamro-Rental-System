@@ -8,6 +8,8 @@ namespace HajurKoRentalSystem.Repositories.Interfaces
 
         T Get(int ID);
 
+        T Retrieve(string ID);
+
         List<T> GetAll(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = null);
 
         void Add(T entity);

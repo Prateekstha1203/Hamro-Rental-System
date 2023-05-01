@@ -1,4 +1,5 @@
 ﻿using HajurKoRentalSystem.Models;
+using HajurKoRentalSystem.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,15 +9,25 @@ namespace HajurKoRentalSystem.Areas.User.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,
+            IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var vehicles = _unitOfWork.Vehicle.GetAll().Where(x => x.IsAvailable).ToList();
+            return View(vehicles);
+        }
+
+        public IActionResult Details(int vehicleId) 
+        {
+            var vehicle = _unitOfWork.Vehicle.Get(vehicleId);
+            return View(vehicle);
         }
 
         public IActionResult Privacy()

@@ -19,8 +19,7 @@ namespace HajurKoRentalSystem.Models
         public string Description { get; set; }
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal Discount { get; set; }
+        public float Discount { get; set; }
 
         [Required]
         public DateTime StartDate { get; set; }

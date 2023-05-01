@@ -4,6 +4,7 @@ using HajurKoRentalSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HajurKoRentalSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230430231242_DbChanges")]
+    partial class DbChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,11 +147,7 @@ namespace HajurKoRentalSystem.Migrations
                     b.Property<string>("ApprovedBy")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("CustomerId1")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
@@ -189,8 +187,6 @@ namespace HajurKoRentalSystem.Migrations
                     b.HasIndex("ApprovedBy");
 
                     b.HasIndex("CustomerId");
-
-                    b.HasIndex("CustomerId1");
 
                     b.HasIndex("VehicleId");
 
@@ -516,15 +512,11 @@ namespace HajurKoRentalSystem.Migrations
                         .WithMany()
                         .HasForeignKey("ApprovedBy");
 
-                    b.HasOne("HajurKoRentalSystem.Models.User", "Customer")
-                        .WithMany()
+                    b.HasOne("HajurKoRentalSystem.Models.Customer", "Customer")
+                        .WithMany("Rental")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("HajurKoRentalSystem.Models.Customer", null)
-                        .WithMany("Rental")
-                        .HasForeignKey("CustomerId1");
 
                     b.HasOne("HajurKoRentalSystem.Models.Vehicle", "Vehicle")
                         .WithMany("Rental")

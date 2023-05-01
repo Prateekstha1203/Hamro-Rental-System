@@ -14,9 +14,8 @@ namespace HajurKoRentalSystem.Models
         public int RentalId { get; set; }
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")]
         [Display(Name = "Repair Cost")]
-        public decimal RepairCost { get; set; }
+        public float RepairCost { get; set; }
 
         [Required]
         [Display(Name = "Description")]

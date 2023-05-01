@@ -14,7 +14,7 @@ namespace HajurKoRentalSystem.Models
         public int VehicleId { get; set; }
 
         [Required]
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
 
         [Required]
         public DateTime StartDate { get; set; }
@@ -30,18 +30,18 @@ namespace HajurKoRentalSystem.Models
 
         public bool IsCancelled { get; set; } = false;
 
-        public string RentalStatus { get; set; }
+        public string RentalStatus { get; set; } = Constants.Constants.Pending;
 
-        public string PaymentStatus { get; set; }
+        public string PaymentStatus { get; set; } = Constants.Constants.Pending;
 
-        public string? ApprovedBy { get; set; }
+		public string? ApprovedBy { get; set; }
 
         [Required]
         public float TotalAmount { get; set; }
 
         [ValidateNever]
         [ForeignKey("CustomerId")]
-        public Customer Customer { get; set; }
+        public User? Customer { get; set; }
 
         [ValidateNever]
         [ForeignKey("VehicleId")]

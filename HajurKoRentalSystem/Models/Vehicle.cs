@@ -2,8 +2,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Drawing.Drawing2D;
-using System.Xml.Linq;
 
 namespace HajurKoRentalSystem.Models
 {
@@ -21,8 +19,7 @@ namespace HajurKoRentalSystem.Models
         public string Color { get; set; }
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal PricePerDay { get; set; }
+        public float PricePerDay { get; set; }
 
         [Required]
         [MaxLength(500)]

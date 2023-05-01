@@ -1,0 +1,46 @@
+﻿@using HajurKoRentalSystem.Models;
+@model Vehicle
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container pb-4">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="row justify-content-center">
+                <div class="col-11">
+                    <h3 class='pt-3 text-primary pb-1 '> Car Details </h3>
+                    <hr>
+                    <form class='row gx-3 pt-5 text-center justify-content-center' method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="col-12 text-center d-flex justify-content-center">
+                            <label htmlFor="imageupload" class="form-label  p-2 bg-light">
+                                <img id="previewImage" src="data:image /*;base64,@(Convert.ToBase64String(Model.Image))" style="width: 100px; height: 100px;" />
+                            </label>
+                        </div>
+                        <div class=' col-8 mb-2 '>
+                            <p style="font-size:16px;"> <strong style="font-size:18px;">Brand: </strong>  @Model.Brand </p>
+                        </div>
+                        <div class=' col-8 mb-2 '>
+                            <p style="font-size:16px;"> <strong style="font-size:18px;">Model: </strong> @Model.Model </p>
+                        </div>
+                        <div class=' col-8 mb-2'>
+                            <p style="font-size:16px;"> <strong style="font-size:18px;">Price per day: </strong> @Model.PricePerDay </p>
+                        </div>
+                        <div class=' col-8 mb-2 '>
+                            <p style="font-size:16px;"> <strong style="font-size:18px;">Color: </strong> @Model.Color </p>
+
+                        </div>
+                        <div class=' col-8 mb-2'>
+                            <p style="font-size:16px;"> <strong style="font-size:18px;">Description: </strong> @Model.Description </p>
+                        </div>
+                        <div class="col-8 mb-2">
+                            <a class="nav-link" asp-area="User" asp-controller="Rental" asp-action="Rental" asp-route-vehicleId="@Model.Id">Rent this vehicle</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
