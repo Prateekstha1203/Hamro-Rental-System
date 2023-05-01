@@ -33,48 +33,51 @@
             </div>
             <div>
                 <ul class="nav nav-pills flex-column mt-2">
-                    <li class="nav-item ms-2 mt-5 mb-3 py-1">
+                    <li class="nav-item ms-2 mt-5 mb-3 p-1">
                         <a class="nav-link" aria-current="page" href="#"> <i class="bi bi-house-fill  pe-2"></i> Dashboard</a>
                     </li>
-                    <li class="nav-item ms-2 mb-3 py-1">
+                    <li class="nav-item ms-2 mb-3 p-1">
                         <a class="nav-link " asp-area="Admin" asp-controller="Vehicle" asp-action="Index"><i class="bi bi-plus-circle-fill pe-2"></i> Cars </a>
                     </li>
-
-                    <li class="nav-item ms-2 mb-3 py-1 " >
+                    <li class="nav-item ms-2 mb-3 p-1">
                         <a class="nav-link" href="#"> <i class="fa-solid fa-user-tie  pe-2"></i> Profile</a>
                     </li>
 
                     <li class="dropdown-menu-lg-end nav-item ms-2 mb-3 py-1 ">
-
-
-                        
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa-solid fa-user-tie  pe-2"></i> Profile</a>
-            
-
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa-solid fa-circle  pe-2"></i> DropDown</a>
                         <ul class="dropdown-menu dropdown-menu-end col-2 mx-0">
-                            <li class="nav-item ms-2 mb-3 py-1 "><a class="dropdown-item nav-link" href="#">Action</a></li>
-                            <li class="nav-item ms-2 mb-3 py-1 "><a class="dropdown-item nav-link" href="#">Action</a></li>
-                            <li class="nav-item ms-2 mb-3 py-1 "><a class="dropdown-item nav-link" href="#">Action</a></li>
-                           
+                            <li class="nav-item ms-2 mb-3 py-1 "><a class="dropdown-item nav-link" href="#"><i class="fa-solid fa-circle  pe-2"></i>Sub-item</a></li>
+                            <li class="nav-item ms-2 mb-3 py-1 "><a class="dropdown-item nav-link" href="#"><i class="fa-solid fa-circle  pe-2"></i>Sub-item</a></li>
+                            <li class="nav-item ms-2 mb-3 py-1 "><a class="dropdown-item nav-link" href="#"><i class="fa-solid fa-circle  pe-2"></i>Sub-item</a></li>
+
                         </ul>
                     </li>
-           
 
-                    <li class="nav-item ms-2 mb-3 py-1  active">
-                        <a class="nav-link" asp-area="Admin" asp-controller="Rental" asp-action="Requests"> <i class="fa-solid fa-calendar  pe-2"></i> Rent Requests</a>
+                    <li class="dropdown-menu-lg-end nav-item ms-2 mb-3 py-1 ">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa-solid fa-square  pe-2"></i> DropDown</a>
+                        <ul class="dropdown-menu dropdown-menu-end col-2 mx-0">
+                            <li class="nav-item ms-2 mb-3 py-1 "><a class="dropdown-item nav-link" href="#"><i class="fa-solid fa-square  pe-2"></i>Sub-item</a></li>
+                            <li class="nav-item ms-2 mb-3 py-1 "><a class="dropdown-item nav-link" href="#"><i class="fa-solid fa-square  pe-2"></i>Sub-item</a></li>
+                            <li class="nav-item ms-2 mb-3 py-1 "><a class="dropdown-item nav-link" href="#"><i class="fa-solid fa-square  pe-2"></i>Sub-item</a></li>
+
+                        </ul>
                     </li>
 
-                    <li class="nav-item ms-2 mb-3 py-1">
+                    <li class="nav-item ms-2 mb-3 p-1  active">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Rental" asp-action="Requests"> <i class="fa-solid fa-calendar  pe-2"></i> Approve Rental</a>
+                    </li>
+
+                    <li class="nav-item ms-2 mb-3 p-1">
                         <a class="nav-link" href="#"> <i class="bi bi-activity  pe-2"></i> Sales</a>
                     </li>
-                    <li class="nav-item ms-2 mb-3 py-1">
+                    <li class="nav-item ms-2 mb-3 p-1">
                         <a class="nav-link" href="#"> <i class="fa-solid fa-coins  pe-2"></i> Change Password</a>
                     </li>
-                   @* <li class="nav-item ms-2 mb-3 p-1">
-                        <a class="nav-link" href="#"> <i class="fa-solid fa-coins  pe-2"></i> Logout</a>
+                    @* <li class="nav-item ms-2 mb-3 p-1">
+                    <a class="nav-link" href="#"> <i class="fa-solid fa-coins  pe-2"></i> Logout</a>
                     </li>*@
-                    <li class="nav-item ms-2 mb-3 py-1">
-                        <form id="logoutForm"  asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                             <a href="#" id="logout" class="nav-link text-danger"><i class="fa-solid fa-coins  pe-2"></i>Logout</a>
                         </form>
                     </li>
