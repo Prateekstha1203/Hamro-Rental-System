@@ -67,7 +67,8 @@
 @{
     var hideNavbar = Context.Request.Path.ToString().Contains("/Identity/Account/Login") ||
                       Context.Request.Path.ToString().Contains("/Identity/Account/Register") ||
-                      Context.Request.Path.ToString().Contains("/Admin/Vehicle");
+                      Context.Request.Path.ToString().Contains("/Admin/Vehicle") ||
+                      Context.Request.Path.ToString().Contains("/Admin/Rental/Requests");
 }
 
 <!DOCTYPE html>
