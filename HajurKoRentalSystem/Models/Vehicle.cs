@@ -28,6 +28,7 @@ namespace HajurKoRentalSystem.Models
         [Required]
         public string Brand { get; set; }
 
+     /*   [Required(ErrorMessage = "Model is required")]*/
         public byte[] Image { get; set; }
 
         public int? OfferId { get; set; }

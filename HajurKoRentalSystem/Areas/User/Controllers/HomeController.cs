@@ -24,7 +24,13 @@ namespace HajurKoRentalSystem.Areas.User.Controllers
             return View(vehicles);
         }
 
-        public IActionResult Details(int vehicleId) 
+		public IActionResult Cars()
+		{
+			var vehicles = _unitOfWork.Vehicle.GetAll().Where(x => x.IsAvailable).ToList();
+			return View(vehicles);
+		}
+
+		public IActionResult Details(int vehicleId) 
         {
             var vehicle = _unitOfWork.Vehicle.Get(vehicleId);
             return View(vehicle);
