@@ -65,8 +65,8 @@ namespace HajurKoRentalSystem.Areas.Identity.Pages.Account.Manage
             {
                 PhoneNumber = phoneNumber,
                 Name = appUser.Name,
-                LicenseNumber = customer.LicenseNumber,
-                CitizenshipNumber = customer.CitizenshipNumber,
+                LicenseNumber = customer?.LicenseNumber,
+                CitizenshipNumber = customer?.CitizenshipNumber,
             };
         }
 

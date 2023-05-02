@@ -39,8 +39,6 @@ namespace HajurKoRentalSystem.Areas.User.Controllers
                 StartDate = x.StartDate.ToString("dd/MM/yyyy"),
                 EndDate = x.EndDate.ToString("dd/MM/yyyy"),
                 TotalAmount = $"Rs {x.TotalAmount}",
-                ActionBy = _unitOfWork.User.Retrieve(x.ApprovedBy).Name,
-                ActionDate = x.ProcessDate?.ToString("dd/MM/yyyy"),
                 Image = _unitOfWork.Vehicle.Get(x.VehicleId).Image,
             }).ToList();
 
