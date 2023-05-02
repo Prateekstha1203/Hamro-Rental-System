@@ -13,8 +13,8 @@ namespace HajurKoRentalSystem.Repositories
 
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            string fromMail = "siddhartha.pradhan.ix@gmail.com";
-            string fromPassword = "pdmbzacgnxdifhya";
+            string fromMail = "prateekshrestha1203@gmail.com";
+            string fromPassword = "oglmtkizolvxzibf";
 
             var message = new MailMessage();
 
