@@ -48,6 +48,10 @@ p {
     background-color: #D9DCFD;
 }
 
+table th {
+    background-color: #D9DCFD !important;
+}
+
 #searchbox button {
     border-color: #e6e6e6;
     background-color: #fff;

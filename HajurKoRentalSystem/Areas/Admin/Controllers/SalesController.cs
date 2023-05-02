@@ -40,11 +40,13 @@ namespace HajurKoRentalSystem.Areas.Admin.Controllers
                                 on user.Id equals customer.UserId
                              join rental in rentals
                                 on user.Id equals rental.CustomerId
-                             group user by new { user.Id, user.Name } into g
+                             group user by new { user.Id, user.Name, user.Address, user.PhoneNumber } into g
                              select new UserRentViewModel()
                              {
                                  Count = g.Count(),
-                                 User = g.Key.Name
+                                 User = g.Key.Name,
+                                 PhoneNumber = g.Key.PhoneNumber,
+                                  Address = g.Key.Address
                              }).ToList();
 
             var inactiveCustomers = (from customer in customers
@@ -59,6 +61,8 @@ namespace HajurKoRentalSystem.Areas.Admin.Controllers
                                          CustomerName = user.Name,
                                          LastRentedDate = rentalGroup.OrderByDescending(x => x.RequestedDate).Select(x => x.RequestedDate).FirstOrDefault().ToString("dd/MM/yyyy")
                                      }).ToList();
+
+
             var result = new SalesViewModel()
             {
                 InactiveUserCount = inactiveCustomers,

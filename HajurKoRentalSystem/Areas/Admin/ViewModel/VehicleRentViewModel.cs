@@ -12,7 +12,10 @@
         public string User { get; set; }
 
         public int Count { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Address { get; set; }
     }
+}
 
     public class InActiveCustomerViewModel
     {
@@ -24,4 +27,4 @@
 
         public string LastRentedDate { get; set; }
     }
-}
+

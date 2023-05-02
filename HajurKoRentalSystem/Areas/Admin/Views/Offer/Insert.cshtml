@@ -6,83 +6,168 @@
     var title = "Add a new offer to our vehicles";
 }
 
-<div class="container-fluid" style=" margin-top:10vh;">
-    <form method="post" enctype="multipart/form-data">
-        <div class="row mb-3">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="col-6">
-                <h3 class="text-dark">@title</h3>
+<link rel="stylesheet" href="~/css/Index.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-5 col-lg-2  d-block align-content-center pe-0 collapse accordion-collapse  vh-100 " id="sidebar">
+            <div class="d-flex p-0">
+                <h5 class="mt-4 ps-3 pb-2"> <a class="navbar-brand text-black" asp-area="" asp-controller="Home" asp-action="Index">HajurKoRentalSystem</a> </h5>
+
             </div>
-            <div class="col-8 pt-4">
-                <div class="form-group row">
-                    <input asp-for="Offer.Id" class="form-control" type="hidden" required />
-                    <div class="col-4">
-                        <label asp-for="Offer.Name"></label>
-                    </div>
-                    <div class="col-8 mb-4">
-                        <input asp-for="Offer.Name" class="form-control" />
-                        <span asp-validation-for="Offer.Name" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="Offer.Discount"></label>
-                    </div>
-                    <div class="col-8 mb-4">
-                        <input asp-for="Offer.Discount" class="form-control"></input>
-                        <span asp-validation-for="Offer.Discount" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="Offer.Description"></label>
-                    </div>
-                    <div class="col-8 mb-4">
-                        <textarea asp-for="Offer.Description" class="form-control"></textarea>
-                        <span asp-validation-for="Offer.Description" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="Offer.StartDate"></label>
-                    </div>
-                    <div class="col-8 mb-4">
-                        <input asp-for="Offer.StartDate" class="form-control"></input>
-                        <span asp-validation-for="Offer.StartDate" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="Offer.EndDate"></label>
-                    </div>
-                    <div class="col-8 mb-4">
-                        <input asp-for="Offer.EndDate" class="form-control"></input>
-                        <span asp-validation-for="Offer.EndDate" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="Vehicles"></label>
-                    </div>
-                    <div class="col-8 mb-4">
-                        <select asp-for="VehicleList" asp-items="@Model.Vehicles" class="form-control multiple">
-                            <option disabled selected style="background-color:#f3edfe; color:#7d43a3;">Select a vehicle to offer</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-8 offset-4">
-                        <div class="row">
-                            <div class="col">
-                                <button type="submit" class="btn btn-green form-control">Create</button>
-                            </div>
-                            <div class="col">
-                                <a asp-action="Index" class="btn btn-danger form-control">Cancel</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div>
+                <ul class="nav nav-pills flex-column mt-2">
+                    <li class="nav-item ms-2 mt-5 mb-3 p-1">
+                        <a class="nav-link" aria-current="page" href="#"> <i class="bi bi-house-fill  pe-2"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1 ">
+                        <a class="nav-link " asp-area="Admin" asp-controller="Vehicle" asp-action="Index"><i class="bi bi-plus-circle-fill pe-2"></i> Cars </a>
+                    </li>
+
+
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Rental" asp-action="Requests"> <i class="fa-solid fa-calendar  pe-2"></i> Approve Rental</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Damage" asp-action="Index"> <i class="fa-solid fa-calendar  pe-2"></i> Damage Requests</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1 ">
+                        <a asp-area="Admin" asp-controller="Sales" asp-action="Index" class="nav-link"> <i class="bi bi-activity  pe-2"></i> Sales</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1 active">
+                        <a asp-area="Admin" asp-controller="Offer" asp-action="Index" class="nav-link"> <i class="bi bi-activity  pe-2"></i> Offers</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a asp-area="Admin" asp-controller="User" asp-action="Customer" class="nav-link"> <i class="fa-solid fa-user-tie  pe-2"></i> Customers</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a asp-area="Admin" asp-controller="User" asp-action="Staff" class="nav-link"> <i class="bi bi-activity  pe-2"></i> Staffs</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a class="nav-link" href="#"> <i class="fa-solid fa-coins  pe-2"></i> Change Password</a>
+                    </li>
+                    @* <li class="nav-item ms-2 mb-3 p-1">
+                    <a class="nav-link" href="#"> <i class="fa-solid fa-coins  pe-2"></i> Logout</a>
+                    </li>*@
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <a href="#" id="logout" class="nav-link text-danger"><i class="fa-solid fa-coins  pe-2"></i>Logout</a>
+                        </form>
+                    </li>
+
+                </ul>
+                <a href="c:\users\lamic\onedrive\desktop\new folder\hajurkorentalsystem\areas\admin\views\user\customer.cshtml">c:\users\lamic\onedrive\desktop\new folder\hajurkorentalsystem\areas\admin\views\user\customer.cshtml</a>
             </div>
         </div>
-    </form>
+        <div class="col-md-9 col-lg-10 " id="midcontent">
+            <div class="container-fluid">
+                <div class="row justify-content-center mt-4">
+               
+                    <div class="col-11 px-0 pl-0 pr-4 bg-white mt-5 pb-5">
+                        <a asp-action="Index" class="btn outline-none bg-secondary text-white rounded-0">
+                            <i class="bi bi-box-arrow-left pe-2"></i>Back
+                        </a>
+                        <div class="container px-0 pb-4">
+                            <div class="row justify-content-center">
+                                <div class="col-11 mt-5">
+                                    <h3 class='pt-3 text-primary pb-1 '>Create a new offer</h3>
+                                    <hr>
+                                    <form method="post" class='row gx-3 pt-5' enctype="multipart/form-data">
+                                       
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                                        <div class="form-group col-6  mb-4 flex-column d-flex">
+                                                    <input asp-for="Offer.Id" class="form-control" type="hidden" required />
+                                                    
+                                                        <label asp-for="Offer.Name"></label>
+                                                   
+                                                        <input asp-for="Offer.Name" class="form-control" />
+                                                        <span asp-validation-for="Offer.Name" class="text-danger"></span>
+                                                   
+                                                </div>
+                                        <div class="form-group col-6 mb-4 flex-column d-flex">
+                                                  
+                                                        <label asp-for="Offer.Discount"></label>
+                                                   
+                                                        <input asp-for="Offer.Discount" class="form-control"></input>
+                                                        <span asp-validation-for="Offer.Discount" class="text-danger"></span>
+                                                   
+                                                </div>
+                                        <div class="form-group col-6 mb-4 flex-column d-flex">
+                                                    
+                                                        <label asp-for="Offer.Description"></label>
+                                                   
+                                                        <textarea asp-for="Offer.Description" class="form-control"></textarea>
+                                                        <span asp-validation-for="Offer.Description" class="text-danger"></span>
+                                                    
+                                                </div>
+                                        <div class="form-group col-6 mb-4 flex-column d-flex">
+                                                    
+                                                        <label asp-for="Offer.StartDate"></label>
+                                                    
+                                                        <input asp-for="Offer.StartDate" class="form-control"></input>
+                                                        <span asp-validation-for="Offer.StartDate" class="text-danger"></span>
+                                                   
+                                                </div>
+                                        <div class="form-group col-6 mb-4 flex-column d-flex">
+                                                  
+                                                        <label asp-for="Offer.EndDate"></label>
+                                                    
+                                                   
+                                                        <input asp-for="Offer.EndDate" class="form-control"></input>
+                                                        <span asp-validation-for="Offer.EndDate" class="text-danger"></span>
+                                                 
+                                                </div>
+                                        <div class="form-group col-6 mb-4 flex-column d-flex">
+                                                   
+                                                        <label asp-for="Vehicles"></label>
+                                                  
+                                                   
+                                                        <select asp-for="VehicleList" asp-items="@Model.Vehicles" class="form-control multiple">
+                                                            <option disabled selected style="background-color:#f3edfe; color:#7d43a3;">Select a vehicle to offer</option>
+                                                        </select>
+                                                  
+                                                </div>
+                                        <div class="form-group col-12 mb-4 flex-column d-flex">
+                                                    
+                                                       
+                                                          
+                                                                <button type="submit" class="btn btn-green form-control bg-primary text-white">Create</button>
+                                                          
+                                                                
+                                                         
+                                                       
+                                                   
+                                                </div>
+                                          
+                                       
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                       
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 </div>
+
+
+
+<script>
+    document.getElementById('logout').addEventListener('click', function (e) {
+        e.preventDefault();
+        document.getElementById('logoutForm').submit();
+    });
+</script>
+
+
