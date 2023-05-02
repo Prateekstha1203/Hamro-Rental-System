@@ -20,6 +20,6 @@
         public const string Offline = "Offline";
         public const string Online = "Online";
 
-        public const string Password = "Rental@123";
+        public const string Password = "H@jurK0Rental@123";
     }
 }

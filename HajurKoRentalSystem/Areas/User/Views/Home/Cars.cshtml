@@ -1,5 +1,5 @@
-﻿@using HajurKoRentalSystem.Models;
-@model List<Vehicle>
+﻿@using HajurKoRentalSystem.Areas.User.ViewModels;
+@model List<VehicleViewModel>
 
 <div class="container">
 	<form method="post">
@@ -16,8 +16,12 @@
 						<div class="card rounded-2" style="width: 21rem;">
 							<img class="card-img-top" src="data:image /*;base64,@(Convert.ToBase64String(item.Image))" alt="Card image cap" style="height: 220px; ">
 							<div class="card-body">
-								<h5>Rs @item.PricePerDay<span class="text-secondary">/Day</span></h5>
-								<p class="card-text mt-3">@item.Brand @item.Model</p>
+								@if(item.Offer != "")
+								{
+									@item.Offer
+								}
+								<h5>Rs @item.Price<span class="text-secondary">/Day</span></h5>
+								<p class="card-text mt-3">@item.Name</p>
 								<a asp-action="Details" asp-route-vehicleId="@item.Id" class="btn btn-primary w-100 py-2">Details</a>
 							</div>
 						</div>

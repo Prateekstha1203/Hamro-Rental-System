@@ -54,14 +54,16 @@ namespace HajurKoRentalSystem.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
-            [EmailAddress]
             [Display(Name = "Name")]
             public string Name { get; set; }
 
             [Required]
-            [EmailAddress]
             [Display(Name = "Address")]
             public string Address { get; set; }
+
+            [Required]
+            [Display(Name = "PhoneNumber")]
+            public string PhoneNumber { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -94,6 +96,8 @@ namespace HajurKoRentalSystem.Areas.Identity.Pages.Account
             user.Name = Input.Name;
             
             user.Address = Input.Address;
+
+            user.PhoneNumber = Input.PhoneNumber;
 
             await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
             

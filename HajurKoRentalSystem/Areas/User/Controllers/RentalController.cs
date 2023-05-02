@@ -50,7 +50,7 @@ namespace HajurKoRentalSystem.Areas.User.Controllers
             }
             else if (role == Constants.Customer)
             {
-                var customer = _unitOfWork.Customer.Retrieve(user.Id);
+                var customer = _unitOfWork.Customer.GetAll().Where(x => x.UserId == userId).FirstOrDefault();
 
                 rent.CustomerCitizenshipNumber = customer.CitizenshipNumber == null ? "No citizenship found" : customer.CitizenshipNumber;
                 rent.CustomerLicenseNumber = customer.LicenseNumber == null ? "No license found" : customer.LicenseNumber;
@@ -81,15 +81,15 @@ namespace HajurKoRentalSystem.Areas.User.Controllers
             }
             else if (role == Constants.Customer)
             {
-                var customer = _unitOfWork.Customer.Retrieve(user.Id);
+                var customer = _unitOfWork.Customer.GetFirstOrDefault(x => x.UserId == user.Id);
 
                 price = vehicle.PricePerDay;
 
                 if (customer.LicenseNumber == null || customer.CitizenshipNumber == null)
                 {
-                    TempData["Delete"] = "Please add your citizenship and license before renting a car";
+                    TempData["StatusMessage"] = "Please add your citizenship and license before renting a car";
 
-                    return RedirectToAction("Documents", "Profile", new { area = "Account" });
+                    return RedirectToPage("/Account/Manage/Index", new { Area = "Identity" });
                 }
             }
 

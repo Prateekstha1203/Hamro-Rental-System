@@ -28,10 +28,12 @@ namespace HajurKoRentalSystem.Models
 
         public string? ApprovedBy { get; set; }
 
+        public DateTime RequestDate { get; set; } = DateTime.Now;
+
+        public DateTime? ApprovedDate { get; set; }
+
         [Required]
         public bool IsApproved { get; set; } = false;
-
-        public byte[] ImageURL { get; set; }
 
         [ValidateNever]
         [ForeignKey("RentalId")]

@@ -4,6 +4,7 @@ using HajurKoRentalSystem.Data;
 using HajurKoRentalSystem.Data.Seed;
 using HajurKoRentalSystem.Repositories.Interfaces;
 using HajurKoRentalSystem.Repositories;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,18 @@ services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 5;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+});
+
 services.AddScoped<IDbInitializer, DbInitializer>();
+
+services.AddTransient<IEmailSender, EmailSender>();
 
 services.AddTransient<IUnitOfWork, UnitOfWork>();
 

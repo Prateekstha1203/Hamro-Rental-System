@@ -1,6 +1,8 @@
-﻿using HajurKoRentalSystem.Models;
+﻿using HajurKoRentalSystem.Areas.User.ViewModels;
+using HajurKoRentalSystem.Models;
 using HajurKoRentalSystem.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Diagnostics;
 
 namespace HajurKoRentalSystem.Areas.User.Controllers
@@ -26,7 +28,16 @@ namespace HajurKoRentalSystem.Areas.User.Controllers
 
 		public IActionResult Cars()
 		{
-			var vehicles = _unitOfWork.Vehicle.GetAll().Where(x => x.IsAvailable).ToList();
+			var vehicles = _unitOfWork.Vehicle.GetAll().Where(x => x.IsAvailable).ToList()
+                .Select(x => new VehicleViewModel()
+                {
+					Id = x.Id,
+					Image = x.Image,
+					Name = $"{x.Brand} - {x.Model}",
+					Price = x.PricePerDay,
+					Offer = x.OfferId != 0 ? $"{_unitOfWork.Offer.GetFirstOrDefault(y => y.Id == x.OfferId)?.Discount}%" : ""
+				}).ToList();
+
 			return View(vehicles);
 		}
 

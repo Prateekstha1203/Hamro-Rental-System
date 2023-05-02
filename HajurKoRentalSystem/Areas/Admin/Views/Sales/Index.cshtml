@@ -1,0 +1,45 @@
+﻿@using HajurKoRentalSystem.Areas.Admin.ViewModel;
+@model SalesViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<h1>All Users Rents</h1>
+
+@foreach (var item in Model.UserRentCount)
+{
+    <div class="row">
+        <div class="card">
+            @item.User: @item.Count 
+        </div>
+    </div>
+}
+
+<br />
+
+<h1>All Vehicles Rent Count</h1>
+
+@foreach (var item in Model.VehicleRentCount)
+{
+    <div class="row">
+        <div class="card">
+        @item.Vehicle: @item.Count 
+        </div>
+    </div>
+}
+
+<br />
+
+<h1>InActive Customers</h1>
+
+@foreach (var item in Model.InactiveUserCount)
+{
+    <div class="row">
+        <div class="card">
+            @item.CustomerName: @item.LastRentedDate
+        </div>
+    </div>
+}

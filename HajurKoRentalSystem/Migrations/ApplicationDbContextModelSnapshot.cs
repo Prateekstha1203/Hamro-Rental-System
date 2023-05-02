@@ -67,13 +67,12 @@ namespace HajurKoRentalSystem.Migrations
                     b.Property<string>("ApprovedBy")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime?>("ApprovedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("DamageDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("ImageURL")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
@@ -89,6 +88,9 @@ namespace HajurKoRentalSystem.Migrations
 
                     b.Property<float>("RepairCost")
                         .HasColumnType("real");
+
+                    b.Property<DateTime>("RequestDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -161,6 +163,9 @@ namespace HajurKoRentalSystem.Migrations
                     b.Property<bool>("IsCancelled")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsDamaged")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsReturned")
                         .HasColumnType("bit");
 
@@ -168,9 +173,15 @@ namespace HajurKoRentalSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("ProcessDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("RentalStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RequestedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("ReturnedDate")
                         .HasColumnType("datetime2");

@@ -16,6 +16,8 @@ namespace HajurKoRentalSystem.Models
         [Required]
         public string CustomerId { get; set; }
 
+        public DateTime RequestedDate { get; set; } = DateTime.Now;
+
         [Required]
         public DateTime StartDate { get; set; }
 
@@ -23,6 +25,8 @@ namespace HajurKoRentalSystem.Models
         public DateTime EndDate { get; set; }
 
         public DateTime? ReturnedDate { get; set; }
+
+        public DateTime? ProcessDate { get; set; }
 
         public bool IsApproved { get; set; } = false;
 
@@ -35,6 +39,8 @@ namespace HajurKoRentalSystem.Models
         public string PaymentStatus { get; set; } = Constants.Constants.Pending;
 
 		public string? ApprovedBy { get; set; }
+
+        public bool IsDamaged { get; set; } = false;
 
         [Required]
         public float TotalAmount { get; set; }

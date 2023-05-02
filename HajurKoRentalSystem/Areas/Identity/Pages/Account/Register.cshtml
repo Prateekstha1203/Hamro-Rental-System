@@ -8,9 +8,6 @@
 
     <div class="row">
         <div class="col-6 bg-danger vh-100">
-            <!-- <video autoplay loop muted plays-inline class="" >
-                <source src="./RequiredGenerousCob-mobile.mp4" type="video/mp4" >
-            </video> -->
         </div>
 
         <div class="col-6 mt-5 mb-5 px-5">
@@ -23,9 +20,6 @@
             </div>
 
             <form id="registerForm" class=" px-5 mt-2 " asp-route-returnUrl="@Model.ReturnUrl" method="post">
-
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
                 <div class="col-10">
                     <div class="form-group mt-3">
                         <input asp-for="Input.Email" type="email" class="form-control py-2 rounded-0" autocomplete="username" aria-required="true" placeholder="Enter your email">
@@ -33,27 +27,25 @@
                     </div>
                 </div>
 
-            @*    <div class="col-10">
+                <div class="col-10">
                     <div class="form-group mt-3">
                         <input asp-for="Input.Name" type="text" class="form-control py-2 rounded-0" autocomplete="name" aria-required="true" placeholder="Enter your name">
-                        <span  class="text-danger"></span>
+                        <span asp-validation-for="Input.Name" class="text-danger"></span>
                     </div>
-                </div>*@
+                </div>
 
-             @*   <div class="col-10">
+                <div class="col-10">
                     <div class="form-group mt-3">
                         <input asp-for="Input.Address" type="text" class="form-control py-2 rounded-0" autocomplete="address" aria-required="true" placeholder="Enter your Address">
                         <span class="text-danger"></span>
                     </div>
-                </div>*@
-@*
+                </div>
                 <div class="col-10">
                     <div class="form-group mt-3">
                         <input asp-for="Input.PhoneNumber" type="number" class="form-control py-2 rounded-0" autocomplete="username" aria-required="true" placeholder="Enter your Phone number">
-                        <span  class="text-danger"></span>
+                        <span class="text-danger"></span>
                     </div>
-                </div>*@
-
+                </div>
                 <div class="col-10">
                     <div class="form-group mt-4">
                         <input asp-for="Input.Password" type="password" class="form-control py-2 rounded-0" autocomplete="new-password" aria-required="true" placeholder="Enter your password">
@@ -66,25 +58,17 @@
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                     </div>
                 </div>
-
                 <div class="col-10">
                     <button id="registerSubmit" type="submit" class="btn btn-primary mt-4 px-5 rounded-0 w-100">Register</button>
                 </div>
 
-                @* <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button> *@
                 <div class=" text-center col-10 mt-2 ">
                     <p>
                         Already have an account ? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Login</a>
                     </p>
                 </div>
             </form>
-
-           
-           
         </div>
-
-      
-    
     </div>
 </div>
 

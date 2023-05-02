@@ -1,4 +1,5 @@
 ﻿using HajurKoRentalSystem.Areas.Admin.ViewModel;
+using HajurKoRentalSystem.Models;
 using HajurKoRentalSystem.Models.Constants;
 using HajurKoRentalSystem.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -13,11 +14,12 @@ namespace HajurKoRentalSystem.Areas.Admin.Controllers
 	public class RentalController : Controller
 	{
 		private readonly IUnitOfWork _unitOfWork;
-
-		public RentalController(IUnitOfWork unitOfWork)
+		private readonly IEmailSender _emailSender;
+		public RentalController(IUnitOfWork unitOfWork, IEmailSender emailSender)
 		{
 			_unitOfWork = unitOfWork;
-		}
+			_emailSender = emailSender;
+        }
 
 		public IActionResult Requests()
 		{
@@ -49,14 +51,45 @@ namespace HajurKoRentalSystem.Areas.Admin.Controllers
 
 			var user = _unitOfWork.User.Retrieve(rent.CustomerId);
 
+			var vehicle = _unitOfWork.Vehicle.Get(rent.VehicleId);
+
 			rent.IsApproved = true;
+			rent.ProcessDate = DateTime.Now;
+			rent.ApprovedBy = claim.Value;
 			rent.RentalStatus = Constants.Approved;
 
 			_unitOfWork.Save();
 
 			TempData["Success"] = "Rent accepted successfully";
 
-			return RedirectToAction("Requests");
+            _emailSender.SendEmailAsync(user.UserName, "Successful Rent",
+                    $"Dear {user.Name},<br><br>Your rent for the vehicle {vehicle.Brand} {vehicle.Model} has been approved. " +
+                    $"<br>Kindly check your system for the details and visit the store to recieve the vehicle." +
+                    $"<br><br>Regards,<br>Hajur ko Car Rental");
+
+            return RedirectToAction("Requests");
 		}
-	}
+
+        [HttpPost]
+        public IActionResult RejectRent(int rentalId)
+        {
+            var rent = _unitOfWork.Rental.Get(rentalId);
+
+            var user = _unitOfWork.User.Retrieve(rent.CustomerId);
+
+            var vehicle = _unitOfWork.Vehicle.Get(rent.VehicleId);
+
+			_unitOfWork.Rental.CancelRent(rentalId);
+
+            TempData["Success"] = "Rent rejected successfully";
+
+            _emailSender.SendEmailAsync(user.UserName, "Unsuccessful Rent",
+                        $"Dear {user.Name},<br><br>Your rent for the vehicle {vehicle.Brand} {vehicle.Model} has been rejected. " +
+                        $"<br>Kindly visit the store to know about the rejection." +
+                        $"<br><br>Regards,<br>Hajur ko Car Rental");
+
+            return RedirectToAction("Requests");
+
+        }
+    }
 }

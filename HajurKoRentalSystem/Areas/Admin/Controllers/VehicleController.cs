@@ -1,4 +1,6 @@
-﻿using HajurKoRentalSystem.Models;
+﻿using HajurKoRentalSystem.Areas.Admin.ViewModel;
+using HajurKoRentalSystem.Models;
+using HajurKoRentalSystem.Models.Constants;
 using HajurKoRentalSystem.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,9 +28,30 @@ namespace HajurKoRentalSystem.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            var vehicle = _unitOfWork.Vehicle.Get(id);
+            var vehicles = _unitOfWork.Vehicle.Get(id);
+            var rentals = _unitOfWork.Rental.GetAll().Where(x => x.RentalStatus == Constants.Approved && x.VehicleId == id);
+            var users = _unitOfWork.User.GetAll();
+            var rents = (from rent in rentals
+                         join user in users
+                            on rent.CustomerId equals user.Id
+                         join staff in users
+                            on rent.ApprovedBy equals staff.Id
+                         select new VehicleDetailRentViewModel()
+                         {
+                             CustomerName = user.Name,
+                             RentedDays = (rent.EndDate - rent.StartDate).TotalDays,
+                             ReturnedDate = rent.ReturnedDate != null ? rent.ReturnedDate?.ToString("dd/MM/yyyy") : "Not returned yet",
+                             ApprovedStaff = staff.Name,
+                             TotalAmount = $"Rs {_unitOfWork.Rental.Get(rent.Id).TotalAmount}"
+                         }).ToList();
 
-            return View(vehicle);
+            var detail = new VehicleDetailViewModel()
+            {
+                Vehicle = vehicles,
+                RentailDetails = rents
+            };
+
+            return View(detail);
         }
 
         [HttpGet]
