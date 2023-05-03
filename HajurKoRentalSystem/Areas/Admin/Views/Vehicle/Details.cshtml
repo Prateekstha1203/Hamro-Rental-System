@@ -150,12 +150,13 @@ else
     <h2>The vehicle has not been rented yet.</h2>
 }
 
-<script>
-    document.getElementById('logout').addEventListener('click', function (e) {
-        e.preventDefault();
-        document.getElementById('logoutForm').submit();
-    });
-</script>
+@section Scripts{
+    <script>
+        $("#tableData").DataTable();
 
-
-
+        document.getElementById('logout').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.getElementById('logoutForm').submit();
+        });
+    </script>
+}

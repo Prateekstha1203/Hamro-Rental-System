@@ -146,6 +146,7 @@ namespace HajurKoRentalSystem.Areas.Admin.Controllers
                 };
 
                 _unitOfWork.Staff.Add(model);
+                _unitOfWork.Save();
             }
 
             await _emailSender.SendEmailAsync(staff.Email, "Email Confirmation",

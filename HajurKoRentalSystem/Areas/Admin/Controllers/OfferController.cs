@@ -66,7 +66,9 @@ namespace HajurKoRentalSystem.Areas.Admin.Controllers
 
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            var offerId = _unitOfWork.Offer.GetAll().Max(x => x.Id) + 1;
+            var id = _unitOfWork.Offer.GetAll().Select(x => x.Id).DefaultIfEmpty(0).Max();
+
+            var offerId = id + 1;
 
             var item = new Offer()
             {
