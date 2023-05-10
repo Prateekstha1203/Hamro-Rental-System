@@ -72,13 +72,14 @@ namespace HajurKoRentalSystem.Areas.Admin.Controllers
 
             var item = new Offer()
             {
-                Id = offerId,
                 Name = offerViewModel.Offer.Name,
                 StartDate = offerViewModel.Offer.StartDate,
                 EndDate = offerViewModel.Offer.EndDate,
                 Discount = offerViewModel.Offer.Discount,
                 Description = offerViewModel.Offer.Description.Replace("<p>", "").Replace("</p>", ""),
             };
+
+            _unitOfWork.Save();
 
             _unitOfWork.Offer.Add(item);
 
