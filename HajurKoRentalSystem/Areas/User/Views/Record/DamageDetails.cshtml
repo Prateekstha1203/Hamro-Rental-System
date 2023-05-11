@@ -5,9 +5,81 @@
     ViewData["Title"] = "DamageDetails";
 }
 
-<h1>Damage Details</h1>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
 
-<div class="container-fluid" style=" margin-top:10vh;">
+
+<div class="container-fluid bg-light mb-5 vh-100">
+	<div class="row justify-content-center ">
+
+		<div class=" col-11 mb-5 " id="midcontent">
+			<div class="container-fluid">
+				<div class="row justify-content-center mt-5">
+					<div class="col-10 ">
+						<h3 class='pt-3 pb-3 text-primary'>Damage Details</h3>
+					</div>
+
+					<div class="col-10 pl-0 px-0 pr-4 bg-white shadow-sm pb-5 mt-4" style="height:600px;">
+						<a asp-action="Accepted" class="btn outline-none bg-secondary text-white rounded-0">
+							<i class="bi bi-box-arrow-left pe-2"></i>Back
+						</a>
+						<div class="container pb-2">
+							<div class="row justify-content-center">
+								<div class="col-11 mt-5 pb-5">
+
+									<form class='row gx-3 pt-3 pb-5' method="post">
+
+										<div class="col-12  mb-3">
+											<div class="row ">
+												<div class="col-12 ">
+													<h5 class="text-dark">Details for @Model.VehicleName</h5>
+													<hr>
+
+												</div>
+											</div>
+										</div>
+										<div class="col-8 pt-4">
+											<div class="form-group row">
+												<div class="col-4">
+													<label asp-for="DamageRequest.RequestDate"></label>
+												</div>
+												<div class="col-8 mb-4">
+													<input asp-for="DamageRequest.RequestDate" disabled class="form-control" />
+													<span asp-validation-for="DamageRequest.RequestDate" class="text-danger"></span>
+												</div>
+											</div>
+											<div class="form-group row">
+												<input asp-for="DamageRequest.RentalId" class="form-control" type="hidden" required />
+												<div class="col-4">
+													<label asp-for="DamageRequest.DamageDescription"></label>
+												</div>
+												<div class="col-8 mb-4">
+													<textarea asp-for="DamageRequest.DamageDescription" disabled class="form-control"></textarea>
+													<span asp-validation-for="DamageRequest.DamageDescription" class="text-danger"></span>
+												</div>
+											</div>
+
+
+
+									</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+@*<div class="container-fluid" style=" margin-top:10vh;">
 	<h3>Damage Request Form Details</h3>
 
 	<div class="row mb-3">
@@ -40,4 +112,4 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div>*@

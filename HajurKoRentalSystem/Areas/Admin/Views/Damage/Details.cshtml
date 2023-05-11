@@ -3,127 +3,240 @@
 
 @{
     ViewData["Title"] = "Damage Requests Details";
+
 }
 
-<div class="row" style=" margin-top:10vh;">
-    <h3 class="mx-5 mb-4">Damage Request Details</h3>
 
-    <div class="card mb-5 mx-5">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-4">
-                    
-                </div>
-                <div class="col-8">
-                    <div class="row mb-1">
-                        <div class="col-3">
-                            <label asp-for="@Model.VehicleName" class="fw-bold">Vehicle Name: </label>
-                        </div>
-                        <div class="col-9">
-                            @Model.VehicleName 
-                        </div>
-                    </div>
-                
-                    <div class="row mb-1">
-                        <div class="col-3">
-                            <label asp-for="@Model.RequestDate" class="fw-bold">Damage Request Date: </label>
-                        </div>
-                        <div class="col-9">
-                            @Model.RequestDate
-                        </div>
-                    </div>
-                    <div class="row mb-1">
-                        <div class="col-3">
-                            <label asp-for="@Model.ApprovedDate" class="fw-bold">Vehicle Approved Date: </label>
-                        </div>
-                        <div class="col-9">
-                            @Model.ApprovedDate
-                        </div>
-                    </div>
-                    <div class="row mb-1">
-                        <div class="col-3">
-                            <label asp-for="@Model.CustomerName" class="fw-bold">Customer Name</label>
-                        </div>
-                        <div class="col-9">
-                            @Model.CustomerName
-                        </div>
-                    </div>
-                    <div class="row mb-1">
-                        <div class="col-3">
-                            <label asp-for="@Model.CustomerPhone" class="fw-bold">Phone Number: </label>
-                        </div>
-                        <div class="col-9">
-                            @Model.CustomerPhone
-                        </div>
-                    </div>
-                    <div class="row mb-1">
-                        <div class="col-3">
-                            <label asp-for="@Model.ApproverName" class="fw-bold"> Approved By: </label>
-                        </div>
-                        <div class="col-9">
-                            @Model.ApproverName
-                        </div>
-                    </div>
-                    <div class="row mb-1">
-                        <div class="col-3">
-                            <label asp-for="@Model.PaymentStatus" class="fw-bold"> Payment Status: </label>
-                        </div>
-                        <div class="col-9">
-                            @Model.PaymentStatus
-                        </div>
-                    </div>
-                    <div class="row mb-1">
-                        <div class="col-3">
-                            <label asp-for="@Model.RepairCost" class="fw-bold">Repair Cost: </label>
-                        </div>
-                        <div class="col-9">
-                            @Model.Cost
-                        </div>
-                    </div>
-                </div>
+
+<link rel="stylesheet" href="~/css/Index.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+
+<style>
+    th {
+        font-size: 14px;
+    }
+
+    td {
+        font-size: 14px;
+    }
+</style>
+<style>
+    table th {
+        background-color: #D9DCFD !important;
+        border-color: #f8f9fa;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-5 col-lg-2  d-block align-content-center pe-0 collapse accordion-collapse  vh-100 " id="sidebar">
+            <div class="d-flex p-0">
+                <h5 class="mt-4 ps-3 pb-2"> <a class="navbar-brand text-black" asp-area="" asp-controller="Home" asp-action="Index">HajurKoRentalSystem</a> </h5>
+
             </div>
-             @if(Model.PaymentStatus != "Paid"){
-                <hr class="mt-4"/>
-             }
+            <div>
+                <ul class="nav nav-pills flex-column mt-2">
 
-            @if(Model.PaymentStatus != "Paid"){
-                <form method="post">
-                    <div class="row d-flex w-100 justify-content-end">
-                        <input asp-for="@Model.DamageId" hidden>
-                        <h4 class="mb-3"> Staff Remarks</h4>
-                        
-                        <div class="d-flex mb-3">
-                            <div class="col-4">
-                                <label class="fw-bold"> Update Repair Cost?</label>
-                            </div>
-                            <div class="col-8">
-                                <input asp-for="RepairCost" class="form-control w-50">
-                            </div>
-                        </div>
-                        <div class="d-flex mb-4">
-                            <div class="col-4">
-                                <label class="fw-bold"> Is it paid?</label>
-                            </div>
-                            <div class="col-8">
-                                <select asp-for="PaymentStatus" class="form-control w-50" aria-required="true" placeholder="Select a color"  >
-                                    <option disabled selected>Select a status</option>
-                                    <option value="true">Yes</option>
-                                    <option value="false">No</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <div class="col-4">
-                            </div>
-                            <div class="col-8">
-                                <button type="submit" class="btn btn-green w-50">Update</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            }
+                    <li class="nav-item ms-2 mb-3 p-1 mt-5 ">
+                        <a class="nav-link " asp-area="Admin" asp-controller="Vehicle" asp-action="Index"><i class="bi bi-plus-circle-fill pe-2"></i> Cars </a>
+                    </li>
+
+
+                    <li class="nav-item ms-2 mb-3 p-1 ">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Rental" asp-action="Requests"> <i class="fa-solid fa-calendar  pe-2"></i> Approve Rental</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Rental" asp-action="AcceptedRents"> <i class="fa-solid fa-calendar  pe-2"></i> Current Rents</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Rental" asp-action="Returned"> <i class="fa-solid fa-calendar  pe-2"></i> Returned Rents</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1 active">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Damage" asp-action="Index"> <i class="fa-solid fa-calendar  pe-2"></i>Damage Details</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1 ">
+                        <a asp-area="Admin" asp-controller="Sales" asp-action="Index" class="nav-link"> <i class="bi bi-activity  pe-2"></i> Sales</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1 ">
+                        <a asp-area="Admin" asp-controller="Offer" asp-action="Index" class="nav-link"> <i class="bi bi-activity  pe-2"></i> Offers</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a asp-area="Admin" asp-controller="User" asp-action="Customer" class="nav-link"> <i class="fa-solid fa-user-tie  pe-2"></i> Customers</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a asp-area="Admin" asp-controller="User" asp-action="Staff" class="nav-link"> <i class="bi bi-activity  pe-2"></i> Staffs</a>
+                    </li>
+
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <a href="#" id="logout" class="nav-link text-danger"><i class="fa-solid fa-coins  pe-2"></i>Logout</a>
+                        </form>
+                    </li>
+
+                </ul>
+
+            </div>
         </div>
+        <div class="col-md-9 col-lg-10 " id="midcontent">
+            <div class="container-fluid">
+                <div class="row justify-content-center mt-4">
+
+                    <div class="col-11  pl-0 pr-4 bg-white mt-5 pb-5">
+                        <div class="container pb-4">
+                            <div class="row justify-content-center">
+                                <h3 class="mx-5 mb-4 mt-5 pt-3 text-primary">Damage Request Details</h3>
+
+                                <div class="card mb-5 mx-5">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-4">
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="row mb-1">
+                                                    <div class="col-3">
+                                                        <label asp-for="@Model.VehicleName" class="fw-bold">Vehicle Name: </label>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        @Model.VehicleName
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-1">
+                                                    <div class="col-3">
+                                                        <label asp-for="@Model.RequestDate" class="fw-bold">Damage Request Date: </label>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        @Model.RequestDate
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-1">
+                                                    <div class="col-3">
+                                                        <label asp-for="@Model.ApprovedDate" class="fw-bold">Vehicle Approved Date: </label>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        @Model.ApprovedDate
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-1">
+                                                    <div class="col-3">
+                                                        <label asp-for="@Model.CustomerName" class="fw-bold">Customer Name</label>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        @Model.CustomerName
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-1">
+                                                    <div class="col-3">
+                                                        <label asp-for="@Model.CustomerPhone" class="fw-bold">Phone Number: </label>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        @Model.CustomerPhone
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-1">
+                                                    <div class="col-3">
+                                                        <label asp-for="@Model.ApproverName" class="fw-bold"> Approved By: </label>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        @Model.ApproverName
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-1">
+                                                    <div class="col-3">
+                                                        <label asp-for="@Model.PaymentStatus" class="fw-bold"> Payment Status: </label>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        @Model.PaymentStatus
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-1">
+                                                    <div class="col-3">
+                                                        <label asp-for="@Model.RepairCost" class="fw-bold">Repair Cost: </label>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        @Model.Cost
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-1">
+                                                    <div class="col-3">
+                                                        <label asp-for="@Model.Description" class="fw-bold">Damage Description: </label>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        @Model.Description
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @if (Model.PaymentStatus != "Paid")
+                                        {
+                                            <hr class="mt-4" />
+                                        }
+
+                                        @if (Model.PaymentStatus != "Paid")
+                                        {
+                                            <form method="post">
+                                                <div class="row d-flex w-100 justify-content-end">
+                                                    <input asp-for="@Model.DamageId" hidden>
+                                                    <h5 class="mb-3 text-primary"> Staff Remarks</h5>
+
+                                                    <div class="d-flex mb-3">
+                                                        <div class="col-4">
+                                                            <label class="fw-bold"> Update Repair Cost?</label>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <input asp-for="RepairCost" class="form-control w-50">
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex mb-4">
+                                                        <div class="col-4">
+                                                            <label class="fw-bold"> Is it paid?</label>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <select asp-for="PaymentStatus" class="form-control w-50" aria-required="true" placeholder="Select a color">
+                                                                <option disabled selected>Select a status</option>
+                                                                <option value="true">Yes</option>
+                                                                <option value="false">No</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex mb-3">
+                                                        <div class="col-4">
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <button type="submit" class="btn btn-primary w-50">Update</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        $("#tableData").DataTable();
+
+        document.getElementById('logout').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.getElementById('logoutForm').submit();
+        });
+    </script>
+}
+
+
 
 

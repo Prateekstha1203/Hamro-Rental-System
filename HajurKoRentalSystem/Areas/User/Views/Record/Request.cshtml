@@ -6,9 +6,62 @@
 }
 <partial name="_Notification" />
 
-<h1>Requested Rents</h1>
+<div class="container">
+	<h3 class="mt-5 text-primary">Request history</h3>
+	<h5 class="mx-5 mt-5 mb-2">Pending Requests</h5>
+	<hr class="mx-5 mb-4" />
 
-<div class="row" style="margin-top:10vh;">
+	<div class="row">
+		<form method="post">
+			@foreach (var item in Model)
+			{
+				<div class="card col-5 mb-5 mx-5 shadow-sm">
+					<div class="card-body">
+						<div class="row justify-content-between">
+							<div class="col-4">
+								<img src="@item.ImageURL" style="width:150px;height:150px; object-fit:cover; margin:auto" />
+								<div class="">
+									<button asp-action="Accepted" asp-route-id="@item.Id" type="submit" class="btn btn-danger  w-100 mt-3">Cancel</button>
+								</div>
+							</div>
+							<div class="col-7">
+								<div class="row">
+									<input asp-for="@item.Id" hidden />
+								</div>
+								<div class="row mb-1">
+
+									<p>	<span class="fw-bold">Vehicle Name:</span> @item.VehicleName</p>
+
+
+								</div>
+								<div class="row mb-1">
+									<p>	<span class="fw-bold">Requested Date:</span> @item.RequestedDate</p>
+								</div>
+								<div class="row mb-1">
+									<p>	<span class="fw-bold">Start Date:</span> @item.StartDate</p>
+								</div>
+								<div class="row mb-1">
+									<p>	<span class="fw-bold">End Date:</span> @item.EndDate</p>
+								</div>
+								<div class="row mb-1">
+									<p>	<span class="fw-bold">Total Amount:</span> @item.TotalAmount</p>
+
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+		</form>
+	</div>
+	
+</div>
+
+
+
+@*<div class="row" style="margin-top:10vh;">
 	<h3 class="mx-5 mb-4">Requested History</h3>
 
 	<form method="post">
@@ -80,3 +133,4 @@
 	</form>
     
 </div>
+*@

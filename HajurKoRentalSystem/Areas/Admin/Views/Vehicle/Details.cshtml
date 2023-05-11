@@ -19,10 +19,8 @@
             </div>
             <div>
                 <ul class="nav nav-pills flex-column mt-2">
-                    <li class="nav-item ms-2 mt-5 mb-3 p-1">
-                        <a class="nav-link" aria-current="page" href="#"> <i class="bi bi-house-fill  pe-2"></i> Dashboard</a>
-                    </li>
-                    <li class="nav-item ms-2 mb-3 p-1 ">
+                  
+                    <li class="nav-item ms-2 mb-3 mt-5 p-1 active ">
                         <a class="nav-link " asp-area="Admin" asp-controller="Vehicle" asp-action="Index"><i class="bi bi-plus-circle-fill pe-2"></i> Cars </a>
                     </li>
 
@@ -31,26 +29,27 @@
                         <a class="nav-link" asp-area="Admin" asp-controller="Rental" asp-action="Requests"> <i class="fa-solid fa-calendar  pe-2"></i> Approve Rental</a>
                     </li>
                     <li class="nav-item ms-2 mb-3 p-1">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Rental" asp-action="AcceptedRents"> <i class="bi bi-calendar-check pe-2"></i> Current Rents</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Rental" asp-action="Returned"> <i class="fa-solid fa-calendar  pe-2"></i> Returned Rents</a>
+                    </li>
+                    <li class="nav-item ms-2 mb-3 p-1">
                         <a class="nav-link" asp-area="Admin" asp-controller="Damage" asp-action="Index"> <i class="fa-solid fa-calendar  pe-2"></i> Damage Requests</a>
                     </li>
                     <li class="nav-item ms-2 mb-3 p-1 ">
                         <a asp-area="Admin" asp-controller="Sales" asp-action="Index" class="nav-link"> <i class="bi bi-activity  pe-2"></i> Sales</a>
                     </li>
-                    <li class="nav-item ms-2 mb-3 p-1 active">
+                    <li class="nav-item ms-2 mb-3 p-1 ">
                         <a asp-area="Admin" asp-controller="Offer" asp-action="Index" class="nav-link"> <i class="bi bi-activity  pe-2"></i> Offers</a>
                     </li>
                     <li class="nav-item ms-2 mb-3 p-1">
                         <a asp-area="Admin" asp-controller="User" asp-action="Customer" class="nav-link"> <i class="fa-solid fa-user-tie  pe-2"></i> Customers</a>
                     </li>
                     <li class="nav-item ms-2 mb-3 p-1">
-                        <a asp-area="Admin" asp-controller="User" asp-action="Staff" class="nav-link"> <i class="bi bi-activity  pe-2"></i> Staffs</a>
+                        <a asp-area="Admin" asp-controller="User" asp-action="Staff" class="nav-link"> <i class="bi bi-person-square pe-2"></i> Staffs</a>
                     </li>
-                    <li class="nav-item ms-2 mb-3 p-1">
-                        <a class="nav-link" href="#"> <i class="fa-solid fa-coins  pe-2"></i> Change Password</a>
-                    </li>
-                    @* <li class="nav-item ms-2 mb-3 p-1">
-                    <a class="nav-link" href="#"> <i class="fa-solid fa-coins  pe-2"></i> Logout</a>
-                    </li>*@
+                
                     <li class="nav-item ms-2 mb-3 p-1">
                         <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                             <a href="#" id="logout" class="nav-link text-danger"><i class="fa-solid fa-coins  pe-2"></i>Logout</a>
