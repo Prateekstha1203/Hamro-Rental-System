@@ -69,6 +69,11 @@ namespace HajurKoRentalSystem.Repositories
             return _dbSet.Find(ID);
         }
 
+        public T Retrieve(int? ID)
+        {
+            return _dbSet.Find(ID);
+        }
+
         public T Retrieve(string ID)
         {
             return _dbSet.Find(ID);

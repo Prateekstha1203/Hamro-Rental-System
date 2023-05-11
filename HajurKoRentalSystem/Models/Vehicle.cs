@@ -30,6 +30,8 @@ namespace HajurKoRentalSystem.Models
 
         public byte[] Image { get; set; }
 
+        public string ImageURL { get; set; }
+
         public int? OfferId { get; set; }
 
         public bool IsAvailable { get; set; } = true;

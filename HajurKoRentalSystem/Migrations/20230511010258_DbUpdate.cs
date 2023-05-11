@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HajurKoRentalSystem.Migrations
 {
-    public partial class DbSetup : Migration
+    public partial class DbUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,7 +17,7 @@ namespace HajurKoRentalSystem.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Discount = table.Column<float>(type: "real", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsExpired = table.Column<bool>(type: "bit", nullable: false)
@@ -77,10 +77,11 @@ namespace HajurKoRentalSystem.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Model = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Color = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PricePerDay = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PricePerDay = table.Column<float>(type: "real", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Brand = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Image = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    ImageURL = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OfferId = table.Column<int>(type: "int", nullable: true),
                     IsAvailable = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -122,9 +123,9 @@ namespace HajurKoRentalSystem.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CitizenshipNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Citizenship = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Citizenship = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     LicenseNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    License = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    License = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: true)
                 },
@@ -250,32 +251,41 @@ namespace HajurKoRentalSystem.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     VehicleId = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RequestedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ReturnedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ProcessDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsApproved = table.Column<bool>(type: "bit", nullable: false),
                     IsReturned = table.Column<bool>(type: "bit", nullable: false),
                     IsCancelled = table.Column<bool>(type: "bit", nullable: false),
                     RentalStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ApprovedBy = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    TotalAmount = table.Column<float>(type: "real", nullable: false)
+                    IsDamaged = table.Column<bool>(type: "bit", nullable: false),
+                    TotalAmount = table.Column<float>(type: "real", nullable: false),
+                    CustomerId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rentals", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Rentals_Customers_CustomerId",
-                        column: x => x.CustomerId,
+                        name: "FK_Rentals_Customers_CustomerId1",
+                        column: x => x.CustomerId1,
                         principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Rentals_Users_ApprovedBy",
                         column: x => x.ApprovedBy,
                         principalTable: "Users",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Rentals_Users_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Rentals_Vehicles_VehicleId",
                         column: x => x.VehicleId,
@@ -291,13 +301,14 @@ namespace HajurKoRentalSystem.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RentalId = table.Column<int>(type: "int", nullable: false),
-                    RepairCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RepairCost = table.Column<float>(type: "real", nullable: false),
                     DamageDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsPaid = table.Column<bool>(type: "bit", nullable: false),
                     PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ApprovedBy = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    IsApproved = table.Column<bool>(type: "bit", nullable: false),
-                    ImageURL = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
+                    RequestDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ApprovedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsApproved = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -344,6 +355,11 @@ namespace HajurKoRentalSystem.Migrations
                 name: "IX_Rentals_CustomerId",
                 table: "Rentals",
                 column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Rentals_CustomerId1",
+                table: "Rentals",
+                column: "CustomerId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rentals_VehicleId",

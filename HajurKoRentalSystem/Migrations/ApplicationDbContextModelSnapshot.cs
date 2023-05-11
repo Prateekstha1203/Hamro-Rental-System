@@ -36,7 +36,10 @@ namespace HajurKoRentalSystem.Migrations
                     b.Property<string>("CitizenshipNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("IsActive")
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRegular")
                         .HasColumnType("bit");
 
                     b.Property<byte[]>("License")
@@ -252,6 +255,10 @@ namespace HajurKoRentalSystem.Migrations
                     b.Property<byte[]>("Image")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ImageURL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");

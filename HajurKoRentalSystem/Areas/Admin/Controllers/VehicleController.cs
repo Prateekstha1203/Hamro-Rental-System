@@ -3,6 +3,8 @@ using HajurKoRentalSystem.Models;
 using HajurKoRentalSystem.Models.Constants;
 using HajurKoRentalSystem.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System.Xml.Linq;
 
 namespace HajurKoRentalSystem.Areas.Admin.Controllers
 {
@@ -10,10 +12,12 @@ namespace HajurKoRentalSystem.Areas.Admin.Controllers
     public class VehicleController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public VehicleController(IUnitOfWork unitOfWork)
+        public VehicleController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         #region 
@@ -91,6 +95,21 @@ namespace HajurKoRentalSystem.Areas.Admin.Controllers
 
             byte[] image;
 
+            var wwwRootPath = _webHostEnvironment.WebRootPath;
+
+            var fileName = $"[Vehicle] {vehicle.Brand} {vehicle.Model} - Image";
+
+            var path = $@"images\vehicles\";
+
+            var uploads = Path.Combine(wwwRootPath, path);
+
+            var extension = Path.GetExtension(file.FileName);
+
+            using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+            {
+                file.CopyTo(fileStreams);
+            }
+
             using (var dataStream = new MemoryStream())
             {
                 file.CopyToAsync(dataStream);
@@ -108,6 +127,7 @@ namespace HajurKoRentalSystem.Areas.Admin.Controllers
                     Image = image,
                     Model = vehicle.Model,
                     PricePerDay = vehicle.PricePerDay,
+                    ImageURL = @$"\images\vehicles\" + fileName + extension,
                 };
 
                 _unitOfWork.Vehicle.Add(result);
@@ -125,6 +145,7 @@ namespace HajurKoRentalSystem.Areas.Admin.Controllers
                     Image = image,
                     Model = vehicle.Model,
                     PricePerDay = vehicle.PricePerDay,
+                    ImageURL = @$"\images\vehicles\" + fileName + extension,
                 };
 
                 _unitOfWork.Vehicle.Update(result);

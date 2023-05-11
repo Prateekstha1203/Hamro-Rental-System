@@ -106,7 +106,7 @@
                                                 {
                                                     <tr>
                                                         <td class="align-middle text-center">@(Model.IndexOf(item) + 1)</td>
-                                                        <td class="align-middle justify-content-center d-flex "> <img id="previewImage" src="data:image /*;base64,@(Convert.ToBase64String(item.Image))" style="border-radius:50%;height:50px; width:50px;" /></td>
+                                                        <td class="align-middle justify-content-center d-flex "> <img id="previewImage" src="@item.ImageURL" style="border-radius:50%;height:50px; width:50px;" /></td>
                                                         <td class="align-middle" >@item.Model</td>
                                                         <td class="align-middle" >@item.Brand</td>
                                                         <td class="align-middle" >@item.Color</td>

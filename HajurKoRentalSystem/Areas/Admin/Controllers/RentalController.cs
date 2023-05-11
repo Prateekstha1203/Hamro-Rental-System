@@ -35,7 +35,7 @@ namespace HajurKoRentalSystem.Areas.Admin.Controllers
 				StartDate = x.StartDate.ToString("dd/MM/yyyy"),
 				EndDate = x.EndDate.ToString("dd/MM/yyyy"),
 				TotalAmount = $"Rs {x.TotalAmount}",
-				VehicleImages = _unitOfWork.Vehicle.Get(x.VehicleId).Image,
+				VehicleImages = _unitOfWork.Vehicle.Get(x.VehicleId).ImageURL,
 			}).ToList();
 
 			return View(result);
@@ -58,7 +58,7 @@ namespace HajurKoRentalSystem.Areas.Admin.Controllers
                 TotalAmount = $"Rs {x.TotalAmount}",
                 ActionBy = _unitOfWork.User.Retrieve(x.ApprovedBy).Name,
                 ActionDate = x.ProcessDate?.ToString("dd/MM/yyyy"),
-                VehicleImages = _unitOfWork.Vehicle.Get(x.VehicleId).Image,
+                VehicleImages = _unitOfWork.Vehicle.Get(x.VehicleId).ImageURL,
             }).ToList();
 
             return View(result);
@@ -82,7 +82,7 @@ namespace HajurKoRentalSystem.Areas.Admin.Controllers
                 TotalAmount = $"Rs {x.TotalAmount}",
                 ActionBy = _unitOfWork.User.Retrieve(x.ApprovedBy).Name,
                 ActionDate = x.ProcessDate?.ToString("dd/MM/yyyy"),
-                VehicleImages = _unitOfWork.Vehicle.Get(x.VehicleId).Image,
+                VehicleImages = _unitOfWork.Vehicle.Get(x.VehicleId).ImageURL,
             }).ToList();
 
             return View(result);

@@ -26,6 +26,6 @@
 
 		public string TotalAmount { get; set; }
 
-		public byte[] VehicleImages { get; set; }
+		public string VehicleImages { get; set; }
 	}
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HajurKoRentalSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230429092745_UpdatedDb")]
-    partial class UpdatedDb
+    [Migration("20230511013029_MinorChanges")]
+    partial class MinorChanges
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,7 +38,10 @@ namespace HajurKoRentalSystem.Migrations
                     b.Property<string>("CitizenshipNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("IsActive")
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRegular")
                         .HasColumnType("bit");
 
                     b.Property<byte[]>("License")
@@ -69,13 +72,12 @@ namespace HajurKoRentalSystem.Migrations
                     b.Property<string>("ApprovedBy")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime?>("ApprovedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("DamageDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("ImageURL")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
@@ -89,8 +91,11 @@ namespace HajurKoRentalSystem.Migrations
                     b.Property<int>("RentalId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("RepairCost")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("RepairCost")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime>("RequestDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -114,8 +119,8 @@ namespace HajurKoRentalSystem.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<decimal>("Discount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("Discount")
+                        .HasColumnType("real");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
@@ -147,7 +152,11 @@ namespace HajurKoRentalSystem.Migrations
                     b.Property<string>("ApprovedBy")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("CustomerId1")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
@@ -159,6 +168,9 @@ namespace HajurKoRentalSystem.Migrations
                     b.Property<bool>("IsCancelled")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsDamaged")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsReturned")
                         .HasColumnType("bit");
 
@@ -166,9 +178,15 @@ namespace HajurKoRentalSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("ProcessDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("RentalStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RequestedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("ReturnedDate")
                         .HasColumnType("datetime2");
@@ -187,6 +205,8 @@ namespace HajurKoRentalSystem.Migrations
                     b.HasIndex("ApprovedBy");
 
                     b.HasIndex("CustomerId");
+
+                    b.HasIndex("CustomerId1");
 
                     b.HasIndex("VehicleId");
 
@@ -238,6 +258,10 @@ namespace HajurKoRentalSystem.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("ImageURL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
 
@@ -249,8 +273,8 @@ namespace HajurKoRentalSystem.Migrations
                     b.Property<int?>("OfferId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("PricePerDay")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("PricePerDay")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -512,11 +536,15 @@ namespace HajurKoRentalSystem.Migrations
                         .WithMany()
                         .HasForeignKey("ApprovedBy");
 
-                    b.HasOne("HajurKoRentalSystem.Models.Customer", "Customer")
-                        .WithMany("Rental")
+                    b.HasOne("HajurKoRentalSystem.Models.User", "Customer")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("HajurKoRentalSystem.Models.Customer", null)
+                        .WithMany("Rental")
+                        .HasForeignKey("CustomerId1");
 
                     b.HasOne("HajurKoRentalSystem.Models.Vehicle", "Vehicle")
                         .WithMany("Rental")

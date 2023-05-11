@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HajurKoRentalSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230502122537_Add-migration")]
-    partial class Addmigration
+    [Migration("20230511010258_DbUpdate")]
+    partial class DbUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,6 +68,9 @@ namespace HajurKoRentalSystem.Migrations
 
                     b.Property<string>("ApprovedBy")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("ApprovedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DamageDescription")
                         .IsRequired()
@@ -251,6 +254,10 @@ namespace HajurKoRentalSystem.Migrations
                     b.Property<byte[]>("Image")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ImageURL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");

@@ -22,7 +22,20 @@ namespace HajurKoRentalSystem.Areas.User.Controllers
 
         public IActionResult Index()
         {
-            var vehicles = _unitOfWork.Vehicle.GetAll().Where(x => x.IsAvailable).ToList();
+            var availableVehicles = _unitOfWork.Vehicle.GetAll().Where(x => x.IsAvailable).ToList();
+
+            var vehicles = (from vehicle in availableVehicles
+                            select new VehiclesViewModel
+                            {
+                                Id = vehicle.Id,
+                                Name = $"{vehicle.Model} {vehicle.Brand}",
+                                ImageURL = vehicle.ImageURL,
+                                Offer = vehicle.OfferId != null ?
+                                ((_unitOfWork.Offer.Retrieve(vehicle.OfferId).EndDate > DateTime.Now && _unitOfWork.Offer.Retrieve(vehicle.OfferId).StartDate < DateTime.Now)
+                                ? $"{_unitOfWork.Offer.Retrieve(vehicle.OfferId).Discount}% Offer" : "No offer") : "No offer",
+                                PricePerDay = $"Rs. {vehicle.PricePerDay}/day"
+                            }).DistinctBy(x => x.Id).ToList();
+
             return View(vehicles);
         }
 
@@ -32,10 +45,10 @@ namespace HajurKoRentalSystem.Areas.User.Controllers
                 .Select(x => new VehicleViewModel()
                 {
 					Id = x.Id,
-					Image = x.Image,
+					Image = x.ImageURL,
 					Name = $"{x.Brand} - {x.Model}",
 					Price = x.PricePerDay,
-					Offer = x.OfferId != 0 ? $"{_unitOfWork.Offer.GetFirstOrDefault(y => y.Id == x.OfferId)?.Discount}%" : ""
+					Offer = x.OfferId != null ? $"{_unitOfWork.Offer.GetFirstOrDefault(y => y.Id == x.OfferId)?.Discount}%" : ""
 				}).ToList();
 
 			return View(vehicles);
